@@ -14,8 +14,14 @@ namespace EmployeeMGNT
     {
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services) //dependancy injection service container
         {
+
+            services.AddMvc(options =>
+            {
+                options.EnableEndpointRouting = false;
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +62,10 @@ namespace EmployeeMGNT
             //app.UseFileServer(fileServerOptions);
             //----------------------------------
 
+            app.UseStaticFiles();
 
+            
+            app.UseMvcWithDefaultRoute();
 
             app.UseRouting();
 
@@ -64,7 +73,7 @@ namespace EmployeeMGNT
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Hello world!");
+                    await context.Response.WriteAsync("Hello World!");
                     //await context.Response.WriteAsync("The environment is : " + env.EnvironmentName); // display the value of ASPNETCORE_ENVIRONMENT from launchSettings.json
                 });
             });
