@@ -24,6 +24,11 @@ namespace EmployeeMGNT
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                //-- setting DeveloperExceptionPageOptions 
+                //DeveloperExceptionPageOptions options = new DeveloperExceptionPageOptions();
+                //options.SourceCodeLineCount = 10; // setting the line count for developer exception page
+                //app.UseDeveloperExceptionPage(options);
             }
 
             //  Middlewares(UseDefaultFiles,UseStaticFiles, UseFileServer)
@@ -32,6 +37,9 @@ namespace EmployeeMGNT
             //----loading default file first------
             //app.UseDefaultFiles(); // if this line is added, when the site is loaded the default.html will load. the default file will load only if it follows  app.UseStaticFiles()
             //app.UseStaticFiles();// wwwroot is the default static file directory - http://localhost:55937/images/lion.jpg will load the lion image from the directory  wwwroot 
+            //OR
+            // app.UseFileServer();
+
 
             //-------loading any other file like home.html first----
             //DefaultFilesOptions defaultFileOptions = new DefaultFilesOptions();
@@ -42,11 +50,12 @@ namespace EmployeeMGNT
             //------------------------------------------------------
 
             // ---- UseFileServer middleware combine both UseDefaultFiles and UseStaticFile
-            FileServerOptions fileServerOptions = new FileServerOptions();
-            fileServerOptions.DefaultFilesOptions.DefaultFileNames.Clear();
-            fileServerOptions.DefaultFilesOptions.DefaultFileNames.Add("foo.html");
-            app.UseFileServer(fileServerOptions);
+            //FileServerOptions fileServerOptions = new FileServerOptions();
+            //fileServerOptions.DefaultFilesOptions.DefaultFileNames.Clear();
+            //fileServerOptions.DefaultFilesOptions.DefaultFileNames.Add("foo.html");
+            //app.UseFileServer(fileServerOptions);
             //----------------------------------
+
 
 
             app.UseRouting();
@@ -55,7 +64,8 @@ namespace EmployeeMGNT
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Hello World!");
+                    await context.Response.WriteAsync("Hello world!");
+                    //await context.Response.WriteAsync("The environment is : " + env.EnvironmentName); // display the value of ASPNETCORE_ENVIRONMENT from launchSettings.json
                 });
             });
         }
