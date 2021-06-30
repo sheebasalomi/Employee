@@ -26,6 +26,29 @@ namespace EmployeeMGNT
                 app.UseDeveloperExceptionPage();
             }
 
+            //  Middlewares(UseDefaultFiles,UseStaticFiles, UseFileServer)
+            // Middle wares always statrt with USE
+
+            //----loading default file first------
+            //app.UseDefaultFiles(); // if this line is added, when the site is loaded the default.html will load. the default file will load only if it follows  app.UseStaticFiles()
+            //app.UseStaticFiles();// wwwroot is the default static file directory - http://localhost:55937/images/lion.jpg will load the lion image from the directory  wwwroot 
+
+            //-------loading any other file like home.html first----
+            //DefaultFilesOptions defaultFileOptions = new DefaultFilesOptions();
+            //defaultFileOptions.DefaultFileNames.Clear();
+            //defaultFileOptions.DefaultFileNames.Add("foo.html");
+            //app.UseDefaultFiles(defaultFileOptions);
+            //app.UseStaticFiles();
+            //------------------------------------------------------
+
+            // ---- UseFileServer middleware combine both UseDefaultFiles and UseStaticFile
+            FileServerOptions fileServerOptions = new FileServerOptions();
+            fileServerOptions.DefaultFilesOptions.DefaultFileNames.Clear();
+            fileServerOptions.DefaultFilesOptions.DefaultFileNames.Add("foo.html");
+            app.UseFileServer(fileServerOptions);
+            //----------------------------------
+
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
