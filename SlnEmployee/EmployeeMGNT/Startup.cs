@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EmployeeMGNT.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -21,6 +22,13 @@ namespace EmployeeMGNT
             {
                 options.EnableEndpointRouting = false;
             });
+            services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
+
+            //AddSingleton - create only one instance for the service per applocation, used in the aplication life time and all the subsequent requests will use the same instance
+            //AddTransient - this method will create a transient service, instances of transient services created each time it is being requested.
+            //AddScoped - this method will create a scoped service, one instance of the service is created when get a request with in that scope, use the same instance within  a particular web request
+
+            //Adv. of dependance injection - loosely coupled and easy for unit testing
 
         }
 
