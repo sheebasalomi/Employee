@@ -21,7 +21,7 @@ namespace EmployeeMGNT
             services.AddMvc(options =>
             {
                 options.EnableEndpointRouting = false;
-            });
+            }).AddXmlSerializerFormatters();
             services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
 
             //AddSingleton - create only one instance for the service per applocation, used in the aplication life time and all the subsequent requests will use the same instance

@@ -1,0 +1,46 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+ <!--html + tab-->
+<head>
+    <title></title>
+</head>
+<body>
+
+    <h3>@ViewData["PageTitle"]</h3><!--only string need no casting-->
+    @{
+        var employee = ViewData["Employee"] as EmployeeMGNT.Models.Employee;
+    }
+
+    <div>
+        Name : @employee.Name
+    </div>
+    <div>
+        Email : @employee.Email
+    </div>
+    <div>
+        Department : @employee.Department
+    </div>
+
+
+    <h3>@ViewBag.PageTitle</h3><!--no need of casting-->
+
+    <div>
+        Name : @ViewBag.Employee.Name
+    </div>
+    <div>
+        Email : @ViewBag.Employee.Email
+    </div>
+    <div>
+        Department : @ViewBag.Employee.Department
+    </div>
+
+
+
+</body>
+</html>
+
+<!--
+    
+A View : is cshtml file
+    -is an htm template with embedded razor markup
+    -contains the logic to display model data
+-->
