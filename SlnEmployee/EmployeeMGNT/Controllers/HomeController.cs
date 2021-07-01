@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EmployeeMGNT.Models;
+using EmployeeMGNT.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -23,9 +24,9 @@ namespace EmployeeMGNT.Controllers
         //    return Json(new {id = 1, name = "Jack" });
         //}
 
-        public string Index()
+        public ViewResult Index()
         {
-            return _employeeRepository.GetEmployee(1).Name;
+            return View(_employeeRepository.GetEmployees());
         }
 
         //public JsonResult Details()
@@ -42,25 +43,84 @@ namespace EmployeeMGNT.Controllers
 
         public ViewResult Details()
         {
-            Employee model = _employeeRepository.GetEmployee(1);
-            ViewData["Employee"] = model;
-            ViewData["PageTitle"] = "Employee Details(ViewData Demo)";//ViewData use dinamic key and no compile time checking and intellisense
-
-            ViewBag.PageTitle = "Employee Details(ViewBag Demo)";
-            ViewBag.Employee = _employeeRepository.GetEmployee(2);//ViewBag use dynamic property and no compile time checking and intellisense
-
-            // preffered approch to pass data from controller to view is StronglyTyped View
-            
-            
-            
-            return  View();
-
             // when we return the View it will look for the Details.cshtml file in the folder View/Home
             // we can load a view with different name : View("Test", model) this will look for file Test.cshtml in View/Home
             //View("Demo/Test.cshtml", model) this will look for file Test.cshtml in root/Demo folder, /Demo/Test, ~/Demo/Test can also be used
             // view("../Demo/Test",model) this will look for file Test.cshtml in Views/Demo as MVC first look in Views/Home
             // we can give absolute or relative path, in absolute path .cshtml extension should be included
-        }
-        
-}
+
+            //ViewData["Employee"] =  _employeeRepository.GetEmployee(1);
+            //ViewData["PageTitle"] = "Employee Details(ViewData Demo)";//ViewData use dinamic key and no compile time checking and intellisense
+            //return View();
+
+
+            //ViewBag.PageTitle = "Employee Details(ViewBag Demo)";
+            //ViewBag.Employee = _employeeRepository.GetEmployee(2);//ViewBag use dynamic property and no compile time checking and intellisense
+            //return View();
+
+            // preffered approch to pass data from controller to view is StronglyTyped View
+
+            //ViewBag.PageTitle = "Employee Details";
+            //Employee model = _employeeRepository.GetEmployee(1);
+            //return View(model);
+
+            //---ViewModel
+
+            HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
+            {
+                Employee = _employeeRepository.GetEmployee(1),
+                PageTitle = "Employee Details"
+            };
+
+            return View(homeDetailsViewModel);
+
+            }
+
+    }
+
+
+
+
+    //<h3>@ViewData["PageTitle"]</h3><!--only string need no casting-->
+    //@{
+    //    var employee = ViewData["Employee"] as EmployeeMGNT.Models.Employee;
+    //}
+
+    //<div>
+    //    Name : @employee.Name
+    //</div>
+    //<div>
+    //    Email : @employee.Email
+    //</div>
+    //<div>
+    //    Department : @employee.Department
+    //</div>
+
+
+    //<h3>@ViewBag.PageTitle</h3><!--no need of casting-->
+
+    //<div>
+    //    Name : @ViewBag.Employee.Name
+    //</div>
+    //<div>
+    //    Email : @ViewBag.Employee.Email
+    //</div>
+    //<div>
+    //    Department : @ViewBag.Employee.Department
+    //</div>
+
+    //@model EmployeeMGNT.Models.Employee
+    // <h3>@ViewBag.PageTitle</h3><!--no need of casting-->
+
+    //<div>
+    //    Name : @Model.Name
+    //</div>
+    //<div>
+    //    Email :  @Model.Email
+    //</div>
+    //<div>
+    //    Department :  @Model.Department
+    //</div>
+
+
 }
