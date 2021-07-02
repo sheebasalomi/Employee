@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeMGNT.Controllers
 {
+    //[Route("Home")]
     public class HomeController : Controller
     {
         private IEmployeeRepository _employeeRepository;
@@ -24,6 +25,8 @@ namespace EmployeeMGNT.Controllers
         //    return Json(new {id = 1, name = "Jack" });
         //}
 
+        //[Route("~/")]
+        //[Route("Index")]
         public ViewResult Index()
         {
             return View(_employeeRepository.GetEmployees());
@@ -75,13 +78,13 @@ namespace EmployeeMGNT.Controllers
             return View(homeDetailsViewModel);
 
             }
-
-        public ViewResult Details(int id)
+        //[Route("Details/{id?}")]
+        public ViewResult Details(int? id)
         {
-            id = (id == 0) ? 1 : id;
+           // id = (id == 0) ? 1 : id;
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
-                Employee = _employeeRepository.GetEmployee(id),
+                Employee = _employeeRepository.GetEmployee(id??1),
                 PageTitle = "Employee Details"
             };
 
