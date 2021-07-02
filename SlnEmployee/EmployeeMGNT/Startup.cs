@@ -72,8 +72,11 @@ namespace EmployeeMGNT
 
             app.UseStaticFiles();
 
-            
-            app.UseMvcWithDefaultRoute();
+
+            // app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes => {
+                routes.MapRoute("default", "{controller}/{action}/{id?}");
+            });
 
             app.UseRouting();
 

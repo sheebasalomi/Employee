@@ -41,7 +41,7 @@ namespace EmployeeMGNT.Controllers
         //    return new ObjectResult(model);
         //}
 
-        public ViewResult Details()
+        public ViewResult EmpDetails()
         {
             // when we return the View it will look for the Details.cshtml file in the folder View/Home
             // we can load a view with different name : View("Test", model) this will look for file Test.cshtml in View/Home
@@ -76,6 +76,17 @@ namespace EmployeeMGNT.Controllers
 
             }
 
+        public ViewResult Details(int id)
+        {
+            id = (id == 0) ? 1 : id;
+            HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
+            {
+                Employee = _employeeRepository.GetEmployee(id),
+                PageTitle = "Employee Details"
+            };
+
+            return View(homeDetailsViewModel);
+        }
     }
 
 
