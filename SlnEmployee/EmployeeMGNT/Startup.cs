@@ -76,7 +76,7 @@ namespace EmployeeMGNT
             // app.UseMvcWithDefaultRoute();
             app.UseMvc(routes =>
             {
-                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}"); // conventional routing
+                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}"); // conventional routing. Tag helper inject the controller and action name in place
             });
             // app.UseMvc();//attribute routing
 
