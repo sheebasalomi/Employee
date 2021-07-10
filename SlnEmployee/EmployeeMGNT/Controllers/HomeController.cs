@@ -98,10 +98,14 @@ namespace EmployeeMGNT.Controllers
         }
 
         [HttpPost]
-        public RedirectToActionResult Create(Employee employee)
+        public IActionResult Create(Employee employee)
         {
-           Employee NewEmployee =  _employeeRepository.Add(employee);
-            return RedirectToAction("details",new { id = NewEmployee.Id});
+            if(ModelState.IsValid)
+            {
+                Employee NewEmployee = _employeeRepository.Add(employee);
+                return RedirectToAction("details", new { id = NewEmployee.Id });
+            }
+            return View();
         }
     }
 
