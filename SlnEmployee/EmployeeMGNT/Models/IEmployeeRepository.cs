@@ -11,5 +11,8 @@ namespace EmployeeMGNT.Models
         Employee GetEmployee(int Id);
         IEnumerable<Employee> GetEmployees();
         Employee Add(Employee employee);
+        Employee Delete(int id);
+        Employee Update(Employee employee);
+
     }
 }

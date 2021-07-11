@@ -6,6 +6,8 @@ using EmployeeMGNT.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -13,16 +15,28 @@ namespace EmployeeMGNT
 {
     public class Startup
     {
+        private IConfiguration _config;
+
+        public Startup(IConfiguration config)
+        {
+            _config = config;
+        }
+
+
+
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services) //dependancy injection service container
         {
-
+            services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(_config.GetConnectionString("EmployeeDBConnection")));
             services.AddMvc(options =>
             {
                 options.EnableEndpointRouting = false;
             }).AddXmlSerializerFormatters();
-            services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
+            //services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
+
+            services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
 
             //AddSingleton - create only one instance for the service per applocation, used in the aplication life time and all the subsequent requests will use the same instance
             //AddTransient - this method will create a transient service, instances of transient services created each time it is being requested.

@@ -25,6 +25,16 @@ namespace EmployeeMGNT.Models
             return employee;
         }
 
+        public Employee Delete(int id)
+        {
+            Employee employee = _employeeList.FirstOrDefault(e => e.Id == id);
+            if (employee != null)
+            {
+                _employeeList.Remove(employee);
+            }
+            return employee;
+        }
+
         public Employee GetEmployee(int Id)
         {
             return _employeeList.FirstOrDefault(e => e.Id == Id);
@@ -33,6 +43,18 @@ namespace EmployeeMGNT.Models
         public IEnumerable<Employee> GetEmployees()
         {
             return _employeeList;
+        }
+
+        public Employee Update(Employee employeeUpdated)
+        {
+            Employee employee = _employeeList.FirstOrDefault(e => e.Id == employeeUpdated.Id);
+            if (employee != null)
+            {
+                employee.Name = employeeUpdated.Name;
+                employee.Email = employeeUpdated.Email;
+                employee.Department = employeeUpdated.Department;
+            }
+            return employee;
         }
     }
 }
