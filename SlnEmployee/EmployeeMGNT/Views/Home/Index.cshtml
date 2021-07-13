@@ -7,12 +7,14 @@
 
 <div class= "card-deck">
     @foreach (var employee in Model)
-    { 
+    {
+        var photoPath = "~/images/" + (employee.PhotoPath ?? "emp.jpg");
+
         <div class="card m-3 col-md-3">
             <div class="card-header">
                 <h3>@employee.Name</h3>
             </div>
-            <img style="height:200px; width:200px" class="card-img" src="~/images/emp.jpg" asp-append-version="true"/>
+            <img style="height:200px; width:200px" class="card-img" src="@photoPath" asp-append-version="true"/>
             <!--image tag helper provides cache busting behaviour for static image files -->
            
             <div class="card-footer text-center">
