@@ -18,12 +18,12 @@
             <!--image tag helper provides cache busting behaviour for static image files -->
            
             <div class="card-footer text-center">
-                <a asp-controller="Home" asp-action="Details" asp-route-id="@employee.Id" class="btn btn-primary">Display</a>
-                @{ 
+                <a asp-controller="home" asp-action="details" asp-route-id="@employee.Id" class="btn btn-primary">Display</a>
+                @{
                     //@Url.Action, @Html.ActionLink can also be used
                 }
-                <a href="home/details/@employee.Id" class="btn btn-primary">View</a>
-                <a  asp-controller="home" asp-action="edit" asp-route-id="@employee.Id" class="btn btn-primary">Edit</a>
+                <a href="/home/details/@employee.Id" class="btn btn-primary">View</a>
+                <a asp-controller="home" asp-action="edit" asp-route-id="@employee.Id" class="btn btn-primary">Edit</a>
                 <a href="#" class="btn btn-danger">Delete</a>
             </div>
         </div>

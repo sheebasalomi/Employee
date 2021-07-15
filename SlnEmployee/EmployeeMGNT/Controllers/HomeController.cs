@@ -86,6 +86,7 @@ namespace EmployeeMGNT.Controllers
 
             }
         //[Route("Details/{id?}")]
+        [HttpGet]
         public ViewResult Details(int? id)
         {
            // id = (id == 0) ? 1 : id;
